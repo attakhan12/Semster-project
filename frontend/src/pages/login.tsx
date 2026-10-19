@@ -22,9 +22,9 @@ export default function Login() {
       <div className="auth-card">
 
         <div className="auth-brand">
-          <h1>ETIS</h1>
+          <h1>ETIS-SYSTEM</h1>
           <p>
-            Examination Timetable
+            Examination-Timetable
             <br />
             Information System
           </p>
