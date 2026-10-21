@@ -1,3 +1,4 @@
+
 import {
   CalendarDays,
   DoorOpen,
@@ -9,21 +10,18 @@ import {
   Sparkles,
 } from "lucide-react";
 
+import { useNavigate } from "react-router-dom";
+
 export default function Dashboard() {
+  const navigate = useNavigate();
+
   return (
     <div className="dashboard">
-
-      {/* =========================
-          SIDEBAR
-      ========================= */}
-
+      {/* SIDEBAR */}
       <aside className="sidebar">
-
         <div className="sidebar-top">
-
           <div className="brand">
             <h1>ETIS</h1>
-
             <p>
               Software Engineering
               <br />
@@ -31,100 +29,121 @@ export default function Dashboard() {
             </p>
           </div>
 
-          <button className="generate-button">
+          <button
+            className="generate-button"
+            onClick={() => navigate("/datesheet")}
+          >
             <Sparkles size={17} />
             <span>Generate Timetable</span>
           </button>
 
           <nav className="navigation">
-
-            <a className="nav-item active">
+            <a
+              href="/dashboard"
+              className="nav-item active"
+              onClick={(event) => {
+                event.preventDefault();
+                navigate("/dashboard");
+              }}
+            >
               <LayoutDashboard size={18} />
               <span>Board</span>
             </a>
 
-            <a className="nav-item">
+            <a
+              href="/datesheet"
+              className="nav-item"
+              onClick={(event) => {
+                event.preventDefault();
+                navigate("/datesheet");
+              }}
+            >
               <CalendarDays size={18} />
               <span>Datesheet</span>
             </a>
 
-            <a className="nav-item">
+            <a
+              href="#halls"
+              className="nav-item"
+              onClick={(event) => event.preventDefault()}
+            >
               <DoorOpen size={18} />
               <span>Halls</span>
             </a>
 
-            <a className="nav-item">
+            <a
+              href="#duties"
+              className="nav-item"
+              onClick={(event) => event.preventDefault()}
+            >
               <ClipboardList size={18} />
               <span>Duties</span>
             </a>
 
-            <a className="nav-item">
+            <a
+              href="#students"
+              className="nav-item"
+              onClick={(event) => event.preventDefault()}
+            >
               <Users size={18} />
               <span>Students</span>
             </a>
 
-            <a className="nav-item">
+            <a
+              href="#rules"
+              className="nav-item"
+              onClick={(event) => event.preventDefault()}
+            >
               <ShieldCheck size={18} />
               <span>Rules</span>
             </a>
 
-            <a className="nav-item">
+            <a
+              href="#contact"
+              className="nav-item"
+              onClick={(event) => event.preventDefault()}
+            >
               <Mail size={18} />
               <span>Contact</span>
             </a>
-
           </nav>
-
         </div>
 
         <div className="sidebar-bottom">
-
           <div className="sidebar-user">
             <strong>Examination Cell</strong>
             <span>Examination cell</span>
           </div>
 
-          <button className="signout-button">
+          <button
+            className="signout-button"
+            onClick={() => navigate("/login")}
+          >
             Sign out
           </button>
 
           <p className="university-name">
             Foundation University Islamabad
           </p>
-
         </div>
-
       </aside>
 
-
-      {/* =========================
-          MAIN CONTENT
-      ========================= */}
-
+      {/* MAIN CONTENT */}
       <main className="main-content">
-
         <div className="top-bar">
-
-          <span>
-            Phase 1 · Accounts
-          </span>
+          <span>Phase 1 · Accounts</span>
 
           <span className="api-status">
             Python API online
           </span>
-
         </div>
 
-
         <section className="hero-section">
-
           <p className="eyebrow">
             SOFTWARE ENGINEERING EXAM CELL
           </p>
 
-          <h2>
-            Good afternoon
-          </h2>
+          <h2>Good afternoon</h2>
 
           <p className="hero-description">
             Students and faculty can register.
@@ -132,34 +151,21 @@ export default function Dashboard() {
             Halls, the datesheet, and duties are still
             empty on purpose.
           </p>
-
         </section>
 
-
-        {/* =========================
-            ACCOUNT CARD
-        ========================= */}
-
+        {/* ACCOUNT CARD */}
         <section className="account-card">
+          <p className="card-label">ACCOUNT</p>
 
-          <p className="card-label">
-            ACCOUNT
-          </p>
-
-          <h3>
-            Examination Cell
-          </h3>
+          <h3>Examination Cell</h3>
 
           <p className="account-role">
             Examination cell · Department of Software Engineering
           </p>
 
-          <p className="account-id">
-            EXAM-001
-          </p>
+          <p className="account-id">EXAM-001</p>
 
           <div className="account-details">
-
             <div>
               <span>EMAIL</span>
               <strong>examcell@fui.edu.pk</strong>
@@ -174,18 +180,11 @@ export default function Dashboard() {
               <span>PHONE</span>
               <strong>Not given</strong>
             </div>
-
           </div>
-
         </section>
 
-
-        {/* =========================
-            STATUS CARDS
-        ========================= */}
-
+        {/* STATUS CARDS */}
         <section className="status-grid">
-
           <StatusCard
             status="OPEN"
             title="Board"
@@ -196,7 +195,8 @@ export default function Dashboard() {
           <StatusCard
             status="WAITING"
             title="Datesheet"
-            description="Official date sheet, still to be added."
+            description="Open the datesheet generator."
+            onClick={() => navigate("/datesheet")}
           />
 
           <StatusCard
@@ -229,25 +229,20 @@ export default function Dashboard() {
             description="Messages sent to the examination cell."
             active
           />
-
         </section>
-
       </main>
-
     </div>
   );
 }
 
-
-/* =========================
-    STATUS CARD COMPONENT
-========================= */
+/* STATUS CARD COMPONENT */
 
 type StatusCardProps = {
   status: "OPEN" | "WAITING";
   title: string;
   description: string;
   active?: boolean;
+  onClick?: () => void;
 };
 
 function StatusCard({
@@ -255,22 +250,28 @@ function StatusCard({
   title,
   description,
   active = false,
+  onClick,
 }: StatusCardProps) {
   return (
-    <div className={`status-card ${active ? "status-card-active" : ""}`}>
+    <div
+      className={`status-card ${active ? "status-card-active" : ""}`}
+      onClick={onClick}
+      role={onClick ? "button" : undefined}
+      tabIndex={onClick ? 0 : undefined}
+      onKeyDown={(event) => {
+        if (onClick && (event.key === "Enter" || event.key === " ")) {
+          event.preventDefault();
+          onClick();
+        }
+      }}
+    >
+      <p className="status">{status}</p>
 
-      <p className="status">
-        {status}
-      </p>
-
-      <h4>
-        {title}
-      </h4>
+      <h4>{title}</h4>
 
       <p className="status-description">
         {description}
       </p>
-
     </div>
   );
 }

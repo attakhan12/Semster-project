@@ -1,35 +1,110 @@
 import { useState } from "react";
+import type { FormEvent } from "react";
 import { Link, useNavigate } from "react-router-dom";
 
-export default function Signup() {
+function Signup() {
   const navigate = useNavigate();
 
   const [fullName, setFullName] = useState("");
   const [registrationNo, setRegistrationNo] = useState("");
   const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [role, setRole] = useState("student");
+  const [password, setPassword] = useState(""); 
 
-  function handleSignup(event: React.FormEvent<HTMLFormElement>) {
+  const [loading, setLoading] = useState(false);
+  const [message, setMessage] = useState("");
+  const [error, setError] = useState("");
+
+  async function handleSignup(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
 
-    console.log({
-      fullName,
-      registrationNo,
-      email,
-      password,
-      role,
-    });
+    setMessage("");
+    setError("");
 
-    // Real signup will be connected to Python later.
-    navigate("/login");
+    if (!fullName.trim()) {
+      setError("Please enter your full name.");
+      return;
+    }
+
+    if (!registrationNo.trim()) {
+      setError("Please enter your registration number.");
+      return;
+    }
+
+    if (!email.trim()) {
+      setError("Please enter your email.");
+      return;
+    }
+
+    if (!password.trim()) {
+      setError("Please enter your password.");
+      return;
+    }
+
+    setLoading(true);
+
+    try {
+      const response = await fetch(
+        "http://127.0.0.1:8000/api/signup",
+        {
+          method: "POST",
+
+          headers: {
+            "Content-Type": "application/json",
+          },
+
+          body: JSON.stringify({
+            full_name: fullName,
+            registration_no: registrationNo,
+            email: email,
+            password: password,
+            role: "student",
+          }),
+        }
+      );
+
+      const data = await response.json();
+
+      if (!data.success) {
+        setError(data.message);
+        setLoading(false);
+        return;
+      }
+
+      setMessage(
+        "Account created successfully!"
+      );
+
+      setFullName("");
+      setRegistrationNo("");
+      setEmail("");
+      setPassword("");
+
+      setTimeout(() => {
+        navigate("/login");
+      }, 1500);
+
+    } catch (error) {
+      console.error(error);
+
+      setError(
+        "Unable to connect to the ETIS server. " +
+        "Make sure the Python backend is running."
+      );
+
+    } finally {
+      setLoading(false);
+    }
   }
 
   return (
     <div className="auth-page">
+
       <div className="auth-card">
 
+        {/* LEFT SIDE */}
+
         <div className="auth-brand">
+
           <h1>ETIS</h1>
 
           <p>
@@ -37,19 +112,41 @@ export default function Signup() {
             <br />
             Information System
           </p>
+
         </div>
+
+
+        {/* RIGHT SIDE */}
 
         <div className="auth-form-container">
 
           <h2>Create Account</h2>
 
           <p className="form-description">
-            Create your ETIS account.
+            Create your account to access the ETIS dashboard.
           </p>
+
+
+          {error && (
+            <div className="form-error">
+              {error}
+            </div>
+          )}
+
+
+          {message && (
+            <div className="form-success">
+              {message}
+            </div>
+          )}
+
 
           <form onSubmit={handleSignup}>
 
+            {/* FULL NAME */}
+
             <div className="form-group">
+
               <label htmlFor="fullName">
                 Full Name
               </label>
@@ -62,11 +159,15 @@ export default function Signup() {
                 onChange={(event) =>
                   setFullName(event.target.value)
                 }
-                required
               />
+
             </div>
 
+
+            {/* REGISTRATION NUMBER */}
+
             <div className="form-group">
+
               <label htmlFor="registrationNo">
                 Registration Number
               </label>
@@ -74,16 +175,20 @@ export default function Signup() {
               <input
                 id="registrationNo"
                 type="text"
-                placeholder="Example: BSSE-001"
+                placeholder="Enter your registration number"
                 value={registrationNo}
                 onChange={(event) =>
                   setRegistrationNo(event.target.value)
                 }
-                required
               />
+
             </div>
 
+
+            {/* EMAIL */}
+
             <div className="form-group">
+
               <label htmlFor="email">
                 Email
               </label>
@@ -96,33 +201,15 @@ export default function Signup() {
                 onChange={(event) =>
                   setEmail(event.target.value)
                 }
-                required
               />
+
             </div>
 
-            <div className="form-group">
-              <label htmlFor="role">
-                Account Type
-              </label>
 
-              <select
-                id="role"
-                value={role}
-                onChange={(event) =>
-                  setRole(event.target.value)
-                }
-              >
-                <option value="student">
-                  Student
-                </option>
-
-                <option value="faculty">
-                  Faculty
-                </option>
-              </select>
-            </div>
+            {/* PASSWORD */}
 
             <div className="form-group">
+
               <label htmlFor="password">
                 Password
               </label>
@@ -130,34 +217,49 @@ export default function Signup() {
               <input
                 id="password"
                 type="password"
-                placeholder="Create a password"
+                placeholder="Enter your password"
                 value={password}
                 onChange={(event) =>
                   setPassword(event.target.value)
                 }
-                required
               />
+
             </div>
+
+
+            {/* BUTTON */}
 
             <button
               type="submit"
               className="primary-button"
+              disabled={loading}
             >
-              Create Account
+
+              {loading
+                ? "Creating Account..."
+                : "Create Account"}
+
             </button>
 
           </form>
 
-          <p className="auth-footer">
+
+          <div className="auth-footer">
+
             Already have an account?{" "}
+
             <Link to="/login">
               Login
             </Link>
-          </p>
+
+          </div>
 
         </div>
 
       </div>
+
     </div>
   );
 }
+
+export default Signup;

@@ -11,12 +11,8 @@ body,
 
 body {
   font-family:
-    Inter,
-    ui-sans-serif,
-    system-ui,
-    -apple-system,
-    BlinkMacSystemFont,
-    "Segoe UI",
+    Arial,
+    Helvetica,
     sans-serif;
 
   background: #f2eee5;
@@ -30,9 +26,231 @@ select {
 }
 
 
-/* =================================
+/* =====================================================
+   AUTHENTICATION
+   LOGIN + SIGNUP
+===================================================== */
+
+.auth-page {
+  min-height: 100vh;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  padding: 30px;
+
+  background: #f2eee5;
+}
+
+.auth-card {
+  width: 100%;
+  max-width: 920px;
+
+  display: grid;
+  grid-template-columns: 40% 60%;
+
+  background: #fbfaf6;
+
+  border: 1px solid #ddd6ca;
+
+  border-radius: 22px;
+
+  overflow: hidden;
+
+  box-shadow:
+    0 20px 60px rgba(45, 39, 30, 0.08);
+}
+
+
+/* LEFT SIDE OF LOGIN */
+
+.auth-brand {
+  padding: 55px 45px;
+
+  background: #174b3d;
+
+  color: white;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.auth-brand h1 {
+  margin: 0;
+
+  font-family:
+    Georgia,
+    "Times New Roman",
+    serif;
+
+  font-size: 52px;
+
+  font-weight: 500;
+
+  letter-spacing: -2px;
+}
+
+.auth-brand p {
+  margin-top: 10px;
+
+  line-height: 1.6;
+
+  color: #dce9e3;
+
+  font-size: 14px;
+}
+
+
+/* RIGHT SIDE OF LOGIN */
+
+.auth-form-container {
+  padding: 55px 50px;
+}
+
+.auth-form-container h2 {
+  margin: 0;
+
+  font-family:
+    Georgia,
+    "Times New Roman",
+    serif;
+
+  font-size: 38px;
+
+  font-weight: 500;
+
+  letter-spacing: -1.5px;
+}
+
+.form-description {
+  margin: 10px 0 30px;
+
+  color: #686158;
+
+  line-height: 1.5;
+}
+
+
+/* INPUTS */
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+
+  margin-bottom: 18px;
+}
+
+.form-group label {
+  margin-bottom: 7px;
+
+  color: #34312c;
+
+  font-size: 13px;
+
+  font-weight: 600;
+}
+
+.form-group input,
+.form-group select {
+  width: 100%;
+
+  padding: 13px 14px;
+
+  background: #fffefa;
+
+  color: #211f1c;
+
+  border: 1px solid #d5cec2;
+
+  border-radius: 10px;
+
+  outline: none;
+
+  transition:
+    border-color 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.form-group input::placeholder {
+  color: #999288;
+}
+
+.form-group input:focus,
+.form-group select:focus {
+  border-color: #174b3d;
+
+  box-shadow:
+    0 0 0 3px rgba(23, 75, 61, 0.08);
+}
+
+
+/* MAIN GREEN BUTTON */
+
+.primary-button {
+  width: 100%;
+
+  padding: 14px;
+
+  margin-top: 8px;
+
+  border: none;
+
+  border-radius: 11px;
+
+  background: #174b3d;
+
+  color: white;
+
+  font-size: 14px;
+
+  font-weight: 600;
+
+  cursor: pointer;
+
+  transition:
+    background 0.2s ease,
+    transform 0.15s ease;
+}
+
+.primary-button:hover {
+  background: #123e32;
+}
+
+.primary-button:active {
+  transform: translateY(1px);
+}
+
+
+/* LOGIN/SIGNUP LINK */
+
+.auth-footer {
+  text-align: center;
+
+  margin-top: 25px;
+
+  color: #686158;
+
+  font-size: 14px;
+}
+
+.auth-footer a {
+  color: #174b3d;
+
+  font-weight: 600;
+
+  text-decoration: none;
+}
+
+.auth-footer a:hover {
+  text-decoration: underline;
+}
+
+
+/* =====================================================
    DASHBOARD
-================================= */
+===================================================== */
 
 .dashboard {
   min-height: 100vh;
@@ -40,22 +258,27 @@ select {
   display: flex;
 
   background: #f2eee5;
+
+  color: #211f1c;
 }
 
 
-/* =================================
+/* =====================================================
    SIDEBAR
-================================= */
+===================================================== */
 
 .sidebar {
-  width: 248px;
+  width: 250px;
+
   min-height: 100vh;
 
   display: flex;
+
   flex-direction: column;
+
   justify-content: space-between;
 
-  padding: 18px 14px 16px;
+  padding: 20px 14px 18px;
 
   background: #f7f4ed;
 
@@ -64,58 +287,75 @@ select {
   flex-shrink: 0;
 }
 
+
+/* ETIS BRAND */
+
 .brand {
-  padding: 0 0 15px;
+  padding: 0 10px 18px;
 }
 
 .brand h1 {
   margin: 0;
 
-  font-family: Georgia, "Times New Roman", serif;
+  font-family:
+    Georgia,
+    "Times New Roman",
+    serif;
 
-  font-size: 30px;
+  font-size: 31px;
+
   font-weight: 500;
 
   letter-spacing: -1.5px;
+
+  color: #211f1c;
 }
 
 .brand p {
-  margin: 4px 0 0;
+  margin: 5px 0 0;
+
+  color: #686158;
 
   font-size: 12px;
 
   line-height: 1.45;
-
-  color: #5f5a52;
 }
 
 
-/* =================================
-   GENERATE BUTTON
-================================= */
+/* =====================================================
+   GENERATE TIMETABLE
+===================================================== */
 
 .generate-button {
   width: 100%;
 
   display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 9px;
 
-  padding: 12px 14px;
+  align-items: center;
+
+  justify-content: center;
+
+  gap: 8px;
+
+  padding: 12px 13px;
+
+  margin-bottom: 13px;
 
   border: none;
-  border-radius: 13px;
+
+  border-radius: 11px;
 
   background: #174b3d;
+
   color: white;
 
   cursor: pointer;
 
-  font-size: 14px;
+  font-size: 13px;
+
   font-weight: 600;
 
-  margin-bottom: 10px;
+  transition: background 0.2s ease;
 }
 
 .generate-button:hover {
@@ -123,39 +363,42 @@ select {
 }
 
 
-/* =================================
-   NAVIGATION
-================================= */
+/* =====================================================
+   SIDEBAR NAVIGATION
+===================================================== */
 
 .navigation {
   display: flex;
+
   flex-direction: column;
+
   gap: 3px;
 }
 
 .nav-item {
-  min-height: 43px;
+  min-height: 42px;
 
   display: flex;
+
   align-items: center;
 
-  gap: 12px;
+  gap: 11px;
 
-  padding: 0 13px;
+  padding: 0 12px;
 
-  border-radius: 13px;
+  border-radius: 11px;
+
+  color: #34312c;
 
   text-decoration: none;
 
-  color: #24221f;
-
-  font-size: 15px;
+  font-size: 14px;
 
   cursor: pointer;
-}
 
-.nav-item svg {
-  flex-shrink: 0;
+  transition:
+    background 0.2s ease,
+    color 0.2s ease;
 }
 
 .nav-item:hover {
@@ -164,40 +407,49 @@ select {
 
 .nav-item.active {
   background: #174b3d;
+
   color: white;
 }
 
 
-/* =================================
+/* =====================================================
    SIDEBAR BOTTOM
-================================= */
+===================================================== */
 
 .sidebar-bottom {
   display: flex;
+
   flex-direction: column;
 
-  gap: 14px;
+  gap: 13px;
 }
 
 .sidebar-user {
   display: flex;
+
   flex-direction: column;
 
   gap: 3px;
+
+  padding: 0 10px;
 }
 
 .sidebar-user strong {
-  font-size: 14px;
+  color: #211f1c;
+
+  font-size: 13px;
 }
 
 .sidebar-user span {
-  font-size: 12px;
+  color: #777066;
 
-  color: #6b655c;
+  font-size: 11px;
 }
 
 .signout-button {
   width: fit-content;
+
+  margin-left: 10px;
 
   padding: 0;
 
@@ -207,85 +459,92 @@ select {
 
   color: #174b3d;
 
-  font-size: 14px;
+  font-size: 13px;
 
   font-weight: 600;
 
   cursor: pointer;
 }
 
+.signout-button:hover {
+  text-decoration: underline;
+}
+
 .university-name {
-  margin: 8px 0 0;
+  margin: 5px 10px 0;
 
-  color: #6b655c;
+  color: #777066;
 
-  font-size: 12px;
+  font-size: 11px;
 
   line-height: 1.5;
 }
 
 
-/* =================================
-   MAIN CONTENT
-================================= */
+/* =====================================================
+   MAIN DASHBOARD AREA
+===================================================== */
 
 .main-content {
   flex: 1;
 
   min-width: 0;
 
-  padding: 16px 22px 60px;
+  padding: 17px 25px 60px;
 }
 
 
-/* =================================
+/* =====================================================
    TOP BAR
-================================= */
+===================================================== */
 
 .top-bar {
   display: flex;
 
   align-items: center;
+
   justify-content: space-between;
 
-  margin-bottom: 25px;
+  margin-bottom: 27px;
 
-  color: #625d55;
+  color: #686158;
 
-  font-size: 13px;
+  font-size: 12px;
 }
 
 .api-status {
-  padding: 7px 13px;
+  padding: 7px 12px;
+
+  border: 1px solid #c9dfd4;
 
   border-radius: 999px;
 
-  background: #dff0e7;
+  background: #e3f0e9;
 
   color: #174b3d;
 
-  font-size: 12px;
+  font-size: 11px;
 
   font-weight: 600;
 }
 
 
-/* =================================
+/* =====================================================
    HERO
-================================= */
+===================================================== */
 
 .hero-section {
-  max-width: 920px;
+  max-width: 900px;
 
-  margin-bottom: 19px;
+  margin-bottom: 22px;
 }
 
 .eyebrow {
-  margin: 0 0 7px;
+  margin: 0 0 8px;
 
   color: #174b3d;
 
-  font-size: 11px;
+  font-size: 10px;
 
   font-weight: 700;
 
@@ -295,56 +554,58 @@ select {
 .hero-section h2 {
   margin: 0;
 
-  font-family: Georgia, "Times New Roman", serif;
+  font-family:
+    Georgia,
+    "Times New Roman",
+    serif;
 
-  font-size: clamp(52px, 6vw, 74px);
+  font-size: clamp(48px, 5vw, 70px);
 
   font-weight: 500;
 
-  line-height: 0.98;
+  line-height: 1;
 
-  letter-spacing: -3.5px;
+  letter-spacing: -3px;
 }
 
 .hero-description {
-  max-width: 760px;
+  max-width: 780px;
 
-  margin: 22px 0 0;
+  margin: 20px 0 0;
 
-  color: #69635a;
+  color: #686158;
 
-  font-size: 16px;
+  font-size: 15px;
 
   line-height: 1.65;
 }
 
 
-/* =================================
+/* =====================================================
    ACCOUNT CARD
-================================= */
+===================================================== */
 
 .account-card {
   width: 100%;
 
-  padding: 22px 20px 19px;
+  padding: 22px 21px 20px;
 
   background: #fbfaf6;
 
   border: 1px solid #ddd6ca;
 
-  border-radius: 22px;
+  border-radius: 20px;
 
   box-shadow:
-    0 1px 2px rgba(40, 35, 28, 0.02);
+    0 2px 5px rgba(40, 35, 28, 0.025);
 }
 
-.card-label,
-.status {
+.card-label {
   margin: 0;
 
   color: #174b3d;
 
-  font-size: 11px;
+  font-size: 10px;
 
   font-weight: 700;
 
@@ -352,33 +613,39 @@ select {
 }
 
 .account-card h3 {
-  margin: 3px 0 0;
+  margin: 5px 0 0;
 
-  font-family: Georgia, "Times New Roman", serif;
+  font-family:
+    Georgia,
+    "Times New Roman",
+    serif;
 
-  font-size: 37px;
+  font-size: 34px;
 
   font-weight: 500;
 
-  letter-spacing: -1.5px;
+  letter-spacing: -1.2px;
 }
 
 .account-role {
-  margin: 8px 0 0;
+  margin: 7px 0 0;
 
   color: #686158;
 
-  font-size: 15px;
+  font-size: 14px;
 }
 
 .account-id {
-  margin: 15px 0 27px;
+  margin: 15px 0 25px;
 
-  font-family: Georgia, "Times New Roman", serif;
+  font-family:
+    Georgia,
+    "Times New Roman",
+    serif;
 
-  font-size: 38px;
+  font-size: 35px;
 
-  letter-spacing: -1.5px;
+  letter-spacing: -1px;
 }
 
 .account-details {
@@ -391,29 +658,32 @@ select {
 
 .account-details div {
   display: flex;
+
   flex-direction: column;
 
-  gap: 7px;
+  gap: 6px;
 }
 
 .account-details span {
-  color: #70695f;
+  color: #777066;
 
-  font-size: 11px;
+  font-size: 10px;
 
   letter-spacing: 1px;
 }
 
 .account-details strong {
-  font-size: 14px;
+  color: #292621;
+
+  font-size: 13px;
 
   font-weight: 500;
 }
 
 
-/* =================================
+/* =====================================================
    STATUS CARDS
-================================= */
+===================================================== */
 
 .status-grid {
   display: grid;
@@ -421,33 +691,47 @@ select {
   grid-template-columns:
     repeat(4, minmax(0, 1fr));
 
-  gap: 12px;
+  gap: 11px;
 
-  margin-top: 15px;
+  margin-top: 14px;
 }
 
 .status-card {
-  min-height: 134px;
+  min-height: 128px;
 
-  padding: 17px;
+  padding: 16px;
 
   background: #fbfaf6;
 
   border: 1px solid #ddd6ca;
 
-  border-radius: 21px;
+  border-radius: 18px;
 }
 
 .status-card-active {
-  background: #dff0e7;
+  background: #e1f0e9;
 
-  border-color: #dff0e7;
+  border-color: #d0e5db;
+}
+
+.status {
+  margin: 0;
+
+  color: #174b3d;
+
+  font-size: 10px;
+
+  font-weight: 700;
+
+  letter-spacing: 1.4px;
 }
 
 .status-card h4 {
-  margin: 15px 0 5px;
+  margin: 14px 0 5px;
 
-  font-size: 16px;
+  color: #292621;
+
+  font-size: 15px;
 
   font-weight: 650;
 }
@@ -457,15 +741,15 @@ select {
 
   color: #686158;
 
-  font-size: 14px;
+  font-size: 12px;
 
   line-height: 1.5;
 }
 
 
-/* =================================
+/* =====================================================
    RESPONSIVE
-================================= */
+===================================================== */
 
 @media (max-width: 1050px) {
 
@@ -480,7 +764,7 @@ select {
 }
 
 
-@media (max-width: 750px) {
+@media (max-width: 760px) {
 
   .dashboard {
     flex-direction: column;
@@ -488,9 +772,11 @@ select {
 
   .sidebar {
     width: 100%;
+
     min-height: auto;
 
     border-right: none;
+
     border-bottom: 1px solid #d9d3c7;
   }
 
@@ -522,4 +808,248 @@ select {
 
     letter-spacing: -2px;
   }
+}
+
+
+@media (max-width: 500px) {
+
+  .auth-page {
+    padding: 15px;
+  }
+
+  .auth-card {
+    grid-template-columns: 1fr;
+  }
+
+  .auth-brand {
+    padding: 35px 30px;
+  }
+
+  .auth-form-container {
+    padding: 35px 30px;
+  }
+}
+
+/* =========================
+   SIGNUP MESSAGES
+========================= */
+
+.form-error {
+  padding: 12px 15px;
+  margin-bottom: 20px;
+
+  border-radius: 9px;
+
+  background: #fce8e8;
+
+  color: #a33a3a;
+
+  font-size: 14px;
+}
+
+.form-success {
+  padding: 12px 15px;
+  margin-bottom: 20px;
+
+  border-radius: 9px;
+
+  background: #e5f4ed;
+
+  color: #18f5a0;
+
+  font-size: 14px;
+}
+
+.primary-button:disabled {
+  opacity: 0.65;
+  cursor: not-allowed;
+}
+
+/* =========================
+   USERS MANAGEMENT
+========================= */
+
+.users-page {
+  min-height: 100vh;
+
+  background: #f4f6f8;
+
+  padding: 50px 30px;
+}
+
+.users-container {
+  max-width: 1250px;
+
+  margin: auto;
+}
+
+.users-header {
+  background: white;
+
+  padding: 30px;
+
+  border-radius: 14px;
+
+  border: 1px solid #e5e7eb;
+
+  display: flex;
+
+  justify-content: space-between;
+
+  align-items: center;
+
+  margin-bottom: 25px;
+}
+
+.users-header h1 {
+  margin: 8px 0;
+
+  color: #17202a;
+
+  font-size: 32px;
+}
+
+.users-header p {
+  margin: 0;
+
+  color: #68737d;
+}
+
+.refresh-button {
+  padding: 11px 20px;
+
+  border: none;
+
+  border-radius: 8px;
+
+  background: #173b32;
+
+  color: white;
+
+  cursor: pointer;
+
+  font-weight: 600;
+}
+
+.refresh-button:hover {
+  background: #0f2b24;
+}
+
+.users-empty {
+  background: white;
+
+  padding: 60px;
+
+  text-align: center;
+
+  border-radius: 14px;
+
+  border: 1px solid #e5e7eb;
+}
+
+.users-empty h3 {
+  margin-bottom: 8px;
+}
+
+.users-empty p {
+  color: #68737d;
+}
+
+.table-container {
+  background: white;
+
+  border: 1px solid #e5e7eb;
+
+  border-radius: 14px;
+
+  overflow-x: auto;
+}
+
+table {
+  width: 100%;
+
+  border-collapse: collapse;
+
+  min-width: 900px;
+}
+
+thead {
+  background: #173b32;
+
+  color: white;
+}
+
+th {
+  padding: 16px;
+
+  text-align: left;
+
+  font-size: 14px;
+}
+
+td {
+  padding: 16px;
+
+  border-bottom: 1px solid #e5e7eb;
+
+  font-size: 14px;
+}
+
+tbody tr:hover {
+  background: #f8faf9;
+}
+
+.role-badge {
+  display: inline-block;
+
+  padding: 5px 10px;
+
+  border-radius: 20px;
+
+  background: #e5f4ed;
+
+  color: #176044;
+
+  font-size: 12px;
+
+  font-weight: 600;
+
+  text-transform: capitalize;
+}
+
+.delete-button {
+  padding: 7px 12px;
+
+  border: 1px solid #e1bcbc;
+
+  border-radius: 7px;
+
+  background: white;
+
+  color: #a33a3a;
+
+  cursor: pointer;
+}
+
+.delete-button:hover {
+  background: #fce8e8;
+}
+
+
+/* MOBILE */
+
+@media (max-width: 700px) {
+
+  .users-page {
+    padding: 25px 15px;
+  }
+
+  .users-header {
+    flex-direction: column;
+
+    align-items: flex-start;
+
+    gap: 20px;
+  }
+
 }

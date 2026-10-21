@@ -1,3 +1,4 @@
+
 import {
   BrowserRouter,
   Routes,
@@ -8,13 +9,12 @@ import {
 import Login from "./pages/login";
 import Signup from "./pages/Signup";
 import Dashboard from "./pages/dashboard";
+import DateSheet from "./pages/datesheet";
 
 function App() {
   return (
     <BrowserRouter>
-
       <Routes>
-
         <Route
           path="/"
           element={<Navigate to="/login" replace />}
@@ -35,8 +35,17 @@ function App() {
           element={<Dashboard />}
         />
 
-      </Routes>
+        <Route
+          path="/datesheet"
+          element={<DateSheet />}
+        />
 
+        {/* Redirect unknown URLs to the login page */}
+        <Route
+          path="*"
+          element={<Navigate to="/login" replace />}
+        />
+      </Routes>
     </BrowserRouter>
   );
 }

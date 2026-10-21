@@ -1,0 +1,1029 @@
+
+/* ETIS DATE SHEET — scoped styles */
+
+.datesheet-shell {
+  background: #f3f0e8;
+  min-height: 100vh;
+  color: #24372f;
+}
+
+.datesheet-main {
+  min-width: 0;
+  padding-bottom: 42px;
+}
+
+.datesheet-toolbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 14px;
+  margin: 18px 0 20px;
+}
+
+.datesheet-pill,
+.datesheet-eyebrow {
+  color: #537365;
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 1.5px;
+}
+
+.datesheet-pill {
+  background: #e2e9df;
+  border: 1px solid #d2ded2;
+  border-radius: 4px;
+  padding: 8px 11px;
+}
+
+.datesheet-main button {
+  font: inherit;
+  cursor: pointer;
+}
+
+.datesheet-main button:disabled {
+  cursor: not-allowed;
+  opacity: 0.5;
+}
+
+.datesheet-light-button,
+.datesheet-primary-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  border-radius: 5px;
+  padding: 10px 14px;
+  font-size: 12px !important;
+  font-weight: 700 !important;
+  transition: background 0.18s ease, transform 0.18s ease;
+}
+
+.datesheet-light-button {
+  background: #fffefa;
+  color: #234b3b;
+  border: 1px solid #d7ddd5;
+}
+
+.datesheet-light-button:hover {
+  background: #eaf0e9;
+}
+
+.datesheet-primary-button {
+  background: #174b3d;
+  color: #fff;
+  border: 1px solid #174b3d;
+}
+
+.datesheet-primary-button:hover {
+  background: #103a2f;
+}
+
+.official-heading {
+  background: #fffefa;
+  border: 1px solid #e3e2d9;
+  border-radius: 8px;
+  text-align: center;
+  padding: 28px 24px 22px;
+  box-shadow: 0 3px 12px rgb(31 53 41 / 3%);
+}
+
+.official-heading h1 {
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: clamp(24px, 3vw, 35px);
+  font-weight: 600;
+  letter-spacing: -0.6px;
+  margin: 8px 0;
+  color: #203d31;
+}
+
+.official-heading > p:not(.datesheet-eyebrow) {
+  color: #65746a;
+  font-size: 13px;
+  margin: 0;
+}
+
+.official-rule {
+  height: 1px;
+  max-width: 520px;
+  margin: 20px auto;
+  background: #d8dfd5;
+}
+
+.official-meta {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 12px 32px;
+  color: #5f6d62;
+  font-size: 11px;
+}
+
+.official-meta b {
+  color: #294c3b;
+}
+
+.candidate-instructions,
+.official-timetable,
+.datesheet-info-card {
+  margin-top: 18px;
+  background: #fffefa;
+  border: 1px solid #e2e1d8;
+  border-radius: 7px;
+  padding: 20px;
+  box-shadow: 0 3px 12px rgb(31 53 41 / 2%);
+}
+
+.candidate-instructions h2,
+.official-table-heading h2 {
+  margin: 0;
+  color: #284737;
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 18px;
+  font-weight: 600;
+}
+
+.candidate-instructions ol {
+  margin: 14px 0 0;
+  padding-left: 23px;
+  color: #58665c;
+  font-size: 12px;
+  line-height: 1.9;
+}
+
+.official-table-heading {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 15px;
+  margin-bottom: 18px;
+}
+
+.official-table-heading .datesheet-eyebrow {
+  margin: 0 0 6px;
+}
+
+.table-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.datesheet-grid-wrap {
+  width: 100%;
+  overflow-x: auto;
+  border: 1px solid #dce1da;
+  border-radius: 5px;
+}
+
+.official-grid {
+  width: 100%;
+  min-width: 750px;
+  border-collapse: collapse;
+  table-layout: fixed;
+  background: white;
+  font-size: 11px;
+}
+
+.official-grid th,
+.official-grid td {
+  border: 1px solid #dce1da;
+  padding: 13px 10px;
+  text-align: center;
+  vertical-align: middle;
+  overflow-wrap: anywhere;
+  line-height: 1.5;
+}
+
+.official-grid thead th {
+  background: #e6ece3;
+  color: #234b3b;
+  font-weight: 800;
+}
+
+.official-grid tbody th {
+  width: 125px;
+  text-align: left;
+  background: #f5f6f0;
+  color: #375443;
+  font-weight: 700;
+}
+
+.official-grid tbody tr:nth-child(even) td {
+  background: #fafbf8;
+}
+
+.datesheet-empty {
+  text-align: center;
+  border: 1px dashed #cbd6ca;
+  border-radius: 6px;
+  background: #f8f8f2;
+  padding: 38px 18px;
+  color: #6a786c;
+}
+
+.datesheet-empty > svg {
+  color: #527762;
+}
+
+.datesheet-empty h3 {
+  margin: 12px 0 7px;
+  color: #294b3a;
+  font-size: 16px;
+}
+
+.datesheet-empty p {
+  font-size: 12px;
+  margin: 0 0 18px;
+}
+
+.datesheet-footnote {
+  margin: 14px 0 0;
+  color: #7b8178;
+  font-size: 10px;
+  line-height: 1.6;
+}
+
+.datesheet-lower-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 14px;
+}
+
+.datesheet-info-card {
+  min-width: 0;
+}
+
+.datesheet-info-card h3 {
+  font-size: 13px;
+  color: #294b3a;
+  margin: 0 0 13px;
+}
+
+.datesheet-info-card p {
+  font-size: 11px;
+  line-height: 1.6;
+  color: #657167;
+  margin: 8px 0;
+  overflow-wrap: anywhere;
+}
+
+.datesheet-info-card p b {
+  color: #294b3a;
+}
+
+.datesheet-alert {
+  margin: 14px 0;
+  padding: 11px 13px;
+  border-radius: 5px;
+  font-size: 12px;
+  line-height: 1.5;
+}
+
+.datesheet-alert.error {
+  color: #873c32;
+  background: #fff0ec;
+  border: 1px solid #f0c8bd;
+}
+
+.datesheet-alert.success {
+  color: #24563b;
+  background: #edf6ec;
+  border: 1px solid #cfe1cd;
+}
+
+/* Generator modal */
+
+.generator-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 22px;
+  background: rgb(19 31 24 / 54%);
+  backdrop-filter: blur(3px);
+}
+
+.generator-modal {
+  width: min(720px, 100%);
+  max-height: min(88vh, 900px);
+  overflow-y: auto;
+  background: #fffefa;
+  border: 1px solid #dfe2d8;
+  border-radius: 10px;
+  box-shadow: 0 24px 80px rgb(0 0 0 / 20%);
+  padding: 25px;
+}
+
+.generator-modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 18px;
+  padding-bottom: 20px;
+  border-bottom: 1px solid #e4e5dc;
+}
+
+.generator-modal-header .datesheet-eyebrow {
+  margin: 0 0 7px;
+}
+
+.generator-modal-header h2 {
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 24px;
+  color: #234737;
+  margin: 0 0 8px;
+}
+
+.generator-modal-header p:not(.datesheet-eyebrow) {
+  color: #788176;
+  font-size: 12px;
+  margin: 0;
+}
+
+.modal-close {
+  display: grid;
+  place-items: center;
+  flex: 0 0 36px;
+  width: 36px;
+  height: 36px;
+  background: #f2f3ed;
+  color: #385345;
+  border: 1px solid #e1e4dc;
+  border-radius: 5px;
+}
+
+.generator-fields {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 15px;
+  margin: 21px 0;
+}
+
+.generator-fields label {
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+  color: #41584a;
+  font-size: 11px;
+  font-weight: 750;
+}
+
+.generator-fields input,
+.generator-fields select {
+  width: 100%;
+  min-width: 0;
+  padding: 11px 10px;
+  border: 1px solid #d9dfd6;
+  border-radius: 5px;
+  background: #fff;
+  color: #273e31;
+  font: inherit;
+  font-size: 12px;
+  outline: none;
+}
+
+.generator-fields input:focus,
+.generator-fields select:focus {
+  border-color: #54816a;
+  box-shadow: 0 0 0 3px rgb(84 129 106 / 12%);
+}
+
+.course-select-heading {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 10px;
+  margin: 12px 0;
+}
+
+.course-select-heading h3 {
+  font-size: 14px;
+  margin: 0 0 5px;
+  color: #294b3a;
+}
+
+.course-select-heading p {
+  font-size: 11px;
+  margin: 0;
+  color: #7b8479;
+}
+
+.course-select-heading > button {
+  background: transparent;
+  border: 0;
+  color: #236347;
+  font-size: 11px;
+  font-weight: 800;
+}
+
+.course-select-list {
+  max-height: 240px;
+  overflow-y: auto;
+  border: 1px solid #e1e4dc;
+  border-radius: 6px;
+}
+
+.course-option {
+  display: flex;
+  align-items: flex-start;
+  gap: 11px;
+  padding: 12px;
+  border-bottom: 1px solid #eceee7;
+  cursor: pointer;
+}
+
+.course-option:last-child {
+  border-bottom: 0;
+}
+
+.course-option:hover {
+  background: #f4f6f0;
+}
+
+.course-option input {
+  accent-color: #174b3d;
+  margin-top: 3px;
+}
+
+.course-option-code {
+  flex: 0 0 66px;
+  color: #2d654a;
+  font-size: 11px;
+  font-weight: 800;
+}
+
+.course-option-title {
+  color: #364a3c;
+  font-size: 12px;
+  line-height: 1.5;
+}
+
+.course-option-title small {
+  display: block;
+  margin-top: 3px;
+  color: #879084;
+  font-size: 10px;
+}
+
+.generator-modal-footer {
+  display: flex;
+  justify-content: flex-end;
+  gap: 9px;
+  margin-top: 20px;
+  padding-top: 16px;
+  border-top: 1px solid #e5e6df;
+}
+
+/* Print only the examination content */
+
+@media print {
+  body * {
+    visibility: hidden !important;
+  }
+
+  .datesheet-main,
+  .datesheet-main * {
+    visibility: visible !important;
+  }
+
+  .datesheet-shell .sidebar,
+  .datesheet-main .top-bar,
+  .datesheet-toolbar,
+  .table-actions,
+  .generator-overlay {
+    display: none !important;
+  }
+
+  .datesheet-shell,
+  .datesheet-main,
+  .official-heading,
+  .candidate-instructions,
+  .official-timetable {
+    background: white !important;
+    box-shadow: none !important;
+    border-color: #ccc !important;
+  }
+
+  .datesheet-main {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    padding: 0 !important;
+  }
+
+  .official-heading,
+  .candidate-instructions,
+  .official-timetable {
+    break-inside: avoid;
+    margin: 10px 0;
+  }
+
+  .datesheet-grid-wrap {
+    overflow: visible;
+  }
+
+  .official-grid {
+    min-width: 0;
+    font-size: 9px;
+  }
+
+  .official-grid th,
+  .official-grid td {
+    padding: 6px 4px;
+  }
+
+  .datesheet-lower-grid {
+    display: none;
+  }
+}
+
+@media (max-width: 1050px) {
+  .datesheet-lower-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 700px) {
+  .datesheet-toolbar,
+  .official-table-heading {
+    align-items: stretch;
+    flex-direction: column;
+  }
+
+  .official-meta {
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .generator-fields,
+  .datesheet-lower-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .generator-modal {
+    padding: 18px;
+  }
+
+  .generator-modal-header h2 {
+    font-size: 20px;
+  }
+
+  .generator-overlay {
+    padding: 10px;
+  }
+
+  .official-heading {
+    padding: 22px 14px;
+  }
+
+  .candidate-instructions,
+  .official-timetable {
+    padding: 14px;
+  }
+}
+
+
+/* ==========================================
+   MULTI-SEMESTER TIMETABLE ADDITIONS
+   ========================================== */
+
+/* Keep the generator usable when many settings are added. */
+.generator-modal {
+  width: min(820px, 100%);
+  max-height: 90vh;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+}
+
+/* Settings and course-selection sections. */
+.generator-section {
+  margin-top: 24px;
+}
+
+.generator-section .course-select-heading h3 {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.generator-section .course-select-heading h3 svg {
+  color: #427257;
+  flex-shrink: 0;
+}
+
+/* Fall, Spring and All semester checkboxes. */
+.semester-checkbox-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 10px;
+  margin-top: 14px;
+}
+
+.semester-option {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  padding: 12px;
+  min-width: 0;
+  border: 1px solid #dce5df;
+  border-radius: 7px;
+  background: #fffefa;
+  color: #294b3a;
+  cursor: pointer;
+  font-size: 12px;
+  transition: background 0.18s ease, border-color 0.18s ease;
+}
+
+.semester-option:hover {
+  background: #f0f5ee;
+  border-color: #9eb8a4;
+}
+
+.semester-option input,
+.skip-sundays-option input {
+  accent-color: #174b3d;
+  flex-shrink: 0;
+}
+
+/* Individual semester course groups. */
+.semester-course-group {
+  margin-top: 16px;
+  border: 1px solid #dce1da;
+  border-radius: 7px;
+  overflow: hidden;
+  background: #fffefa;
+}
+
+.semester-course-heading {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 9px;
+  padding: 12px 14px;
+  background: #eaf0e7;
+  border-bottom: 1px solid #dce1da;
+  color: #294b3a;
+  font-size: 12px;
+}
+
+.semester-course-heading strong {
+  margin-right: auto;
+  font-size: 13px;
+}
+
+.semester-course-heading span {
+  color: #6c796e;
+  font-size: 11px;
+}
+
+.semester-course-heading button {
+  padding: 6px 10px;
+  border: 1px solid #d2ddd3;
+  border-radius: 5px;
+  background: #fffefa;
+  color: #235541;
+  font-size: 11px;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.semester-course-heading button:hover {
+  background: #e2eae0;
+}
+
+.semester-course-group .course-select-list {
+  max-height: 240px;
+  overflow-y: auto;
+  border: 0;
+  border-radius: 0;
+}
+
+/* Holiday dates input. */
+.holiday-label {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-top: 14px;
+  color: #41584a;
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.holiday-label textarea {
+  width: 100%;
+  min-height: 82px;
+  box-sizing: border-box;
+  resize: vertical;
+  padding: 12px;
+  border: 1px solid #d9dfd6;
+  border-radius: 5px;
+  outline: none;
+  background: #fff;
+  color: #273e31;
+  font: inherit;
+  font-size: 12px;
+  font-weight: 400;
+  line-height: 1.6;
+}
+
+.holiday-label textarea:focus {
+  border-color: #54816a;
+  box-shadow: 0 0 0 3px rgb(84 129 106 / 12%);
+}
+
+.holiday-label small {
+  color: #788176;
+  font-size: 10px;
+  font-weight: 400;
+  line-height: 1.6;
+}
+
+.skip-sundays-option {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  margin-top: 16px;
+  color: #41584a;
+  font-size: 12px;
+  cursor: pointer;
+}
+
+.datesheet-setting-note {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+  margin-top: 14px;
+  color: #65746a;
+  font-size: 11px;
+  line-height: 1.7;
+}
+
+.datesheet-setting-note svg {
+  flex-shrink: 0;
+  margin-top: 2px;
+  color: #527762;
+}
+
+/* Combined timetable: one column per selected semester. */
+.combined-grid {
+  width: 100%;
+  min-width: 760px;
+  border-collapse: collapse;
+  table-layout: auto;
+  background: #fffefa;
+  font-size: 11px;
+}
+
+.combined-grid th,
+.combined-grid td {
+  padding: 12px 10px;
+  border: 1px solid #dce1da;
+  text-align: left;
+  vertical-align: top;
+  overflow-wrap: anywhere;
+  line-height: 1.5;
+}
+
+.combined-grid thead th {
+  background: #174b3d;
+  color: #fff;
+  font-weight: 800;
+  text-align: center;
+}
+
+.combined-grid thead th:first-child {
+  min-width: 125px;
+  text-align: left;
+}
+
+.combined-grid tbody th {
+  width: 125px;
+  min-width: 125px;
+  background: #f0f3eb;
+  color: #294b3a;
+  font-weight: 700;
+}
+
+.combined-grid tbody th small {
+  display: block;
+  margin-top: 5px;
+  color: #718076;
+  font-size: 10px;
+  font-weight: 400;
+}
+
+.combined-grid .exam-cell {
+  min-width: 145px;
+  background: #fffefa;
+}
+
+.combined-grid tbody tr:nth-child(even) .exam-cell {
+  background: #f8faf6;
+}
+
+.combined-grid .empty-exam-cell {
+  min-width: 80px;
+  background: #f8f8f2;
+  text-align: center;
+  vertical-align: middle;
+}
+
+.calendar-exam {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  min-width: 115px;
+  overflow-wrap: anywhere;
+}
+
+.calendar-exam strong {
+  color: #235541;
+  font-size: 11px;
+  font-weight: 800;
+}
+
+.calendar-exam span {
+  color: #364a3c;
+  font-size: 11px;
+  line-height: 1.6;
+}
+
+.calendar-exam small {
+  color: #718076;
+  font-size: 10px;
+  line-height: 1.5;
+}
+
+.no-exam-label {
+  color: #a5afa6;
+  font-size: 14px;
+}
+
+/* Keep alerts readable for longer backend validation messages. */
+.datesheet-alert {
+  overflow-wrap: anywhere;
+}
+
+/* Make the modal footer remain visible during scrolling. */
+.generator-modal-footer {
+  position: sticky;
+  bottom: -1px;
+  z-index: 2;
+  background: #fffefa;
+  padding-bottom: 2px;
+}
+
+/* Tablet layout. */
+@media (max-width: 900px) {
+  .semester-checkbox-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .generator-modal {
+    width: min(720px, 100%);
+  }
+
+  .official-table-heading {
+    align-items: flex-start;
+  }
+}
+
+/* Mobile layout. */
+@media (max-width: 600px) {
+  .generator-overlay {
+    padding: 8px;
+  }
+
+  .generator-modal {
+    width: 100%;
+    max-height: 94vh;
+    padding: 16px;
+    border-radius: 7px;
+  }
+
+  .generator-fields {
+    grid-template-columns: 1fr;
+    gap: 13px;
+  }
+
+  .semester-checkbox-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .semester-course-heading {
+    gap: 7px;
+  }
+
+  .semester-course-heading strong {
+    width: 100%;
+  }
+
+  .official-table-heading {
+    flex-direction: column;
+  }
+
+  .table-actions {
+    width: 100%;
+  }
+
+  .datesheet-light-button,
+  .datesheet-primary-button {
+    max-width: 100%;
+  }
+
+  .official-grid {
+    min-width: 680px;
+  }
+}
+
+/* Print the timetable without the navigation or generator. */
+@media print {
+  body * {
+    visibility: hidden !important;
+  }
+
+  .datesheet-main,
+  .datesheet-main * {
+    visibility: visible !important;
+  }
+
+  .datesheet-shell .sidebar,
+  .datesheet-main .top-bar,
+  .datesheet-toolbar,
+  .table-actions,
+  .generator-overlay {
+    display: none !important;
+  }
+
+  .datesheet-shell,
+  .datesheet-main,
+  .official-heading,
+  .candidate-instructions,
+  .official-timetable {
+    background: #fff !important;
+    box-shadow: none !important;
+    border-color: #ccc !important;
+  }
+
+  .datesheet-main {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    padding: 0 !important;
+  }
+
+  .official-heading,
+  .candidate-instructions,
+  .official-timetable {
+    break-inside: avoid;
+    margin: 10px 0;
+  }
+
+  .datesheet-grid-wrap {
+    overflow: visible !important;
+    border: 0;
+  }
+
+  .combined-grid {
+    width: 100%;
+    min-width: 0;
+    table-layout: auto;
+    font-size: 8px;
+  }
+
+  .combined-grid th,
+  .combined-grid td {
+    padding: 5px 4px;
+  }
+
+  .combined-grid thead th {
+    background: #e6ece3 !important;
+    color: #234b3b !important;
+    print-color-adjust: exact;
+    -webkit-print-color-adjust: exact;
+  }
+
+  .combined-grid tbody th {
+    min-width: 0;
+  }
+
+  .combined-grid .exam-cell {
+    min-width: 0;
+  }
+
+  .calendar-exam {
+    min-width: 0;
+    gap: 3px;
+  }
+
+  .calendar-exam span,
+  .calendar-exam small {
+    font-size: 8px;
+  }
+
+  .datesheet-lower-grid {
+    display: none !important;
+  }
+}
