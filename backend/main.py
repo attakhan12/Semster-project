@@ -1,8 +1,11 @@
 import sqlite3
+from pathlib import Path
 
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
-from pydantic import BaseModel
+from pydantic import BaseModel, EmailStr
+
+from datesheet import router as datesheet_router
 
 
 # =========================================================
@@ -36,59 +39,53 @@ app.add_middleware(
 # DATABASE
 # =========================================================
 
-DATABASE_NAME = "etis.db"
+DATABASE_NAME = Path(__file__).resolve().parent / "etis.db"
 
 
 def get_database():
     connection = sqlite3.connect(DATABASE_NAME)
-
     connection.row_factory = sqlite3.Row
-
     return connection
 
 
 def create_database():
-
     connection = get_database()
 
-    cursor = connection.cursor()
+    try:
+        cursor = connection.cursor()
 
-    cursor.execute(
-        """
-        CREATE TABLE IF NOT EXISTS users (
-            id INTEGER PRIMARY KEY AUTOINCREMENT,
-            full_name TEXT NOT NULL,
-            registration_no TEXT NOT NULL UNIQUE,
-            email TEXT NOT NULL UNIQUE,
-            password TEXT NOT NULL,
-            role TEXT NOT NULL DEFAULT 'student',
-            created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+        cursor.execute(
+            """
+            CREATE TABLE IF NOT EXISTS users (
+                id INTEGER PRIMARY KEY AUTOINCREMENT,
+                full_name TEXT NOT NULL,
+                registration_no TEXT NOT NULL UNIQUE,
+                email TEXT NOT NULL UNIQUE,
+                password TEXT NOT NULL,
+                role TEXT NOT NULL DEFAULT 'student',
+                created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+            )
+            """
         )
-        """
-    )
 
-    connection.commit()
+        connection.commit()
 
-    connection.close()
+    finally:
+        connection.close()
 
 
 create_database()
 
 
 # =========================================================
-# USER DATA MODEL
+# SIGNUP DATA MODEL
 # =========================================================
 
 class SignupData(BaseModel):
-
     full_name: str
-
     registration_no: str
-
-    email: str
-
+    email: EmailStr
     password: str
-
     role: str = "student"
 
 
@@ -98,19 +95,17 @@ class SignupData(BaseModel):
 
 @app.get("/")
 def home():
-
     return {
         "message": "ETIS Backend is running"
     }
 
 
 # =========================================================
-# HEALTH
+# HEALTH CHECK
 # =========================================================
 
 @app.get("/api/health")
 def health():
-
     return {
         "status": "ok",
         "database": "SQLite"
@@ -123,17 +118,14 @@ def health():
 
 @app.post("/api/signup")
 def signup(user: SignupData):
-
     connection = get_database()
 
-    cursor = connection.cursor()
-
     try:
+        cursor = connection.cursor()
 
         cursor.execute(
             """
-            INSERT INTO users
-            (
+            INSERT INTO users (
                 full_name,
                 registration_no,
                 email,
@@ -145,7 +137,7 @@ def signup(user: SignupData):
             (
                 user.full_name,
                 user.registration_no,
-                user.email,
+                str(user.email),
                 user.password,
                 user.role,
             )
@@ -153,31 +145,25 @@ def signup(user: SignupData):
 
         connection.commit()
 
-        user_id = cursor.lastrowid
-
         return {
             "success": True,
             "message": "Account created successfully.",
-            "user_id": user_id
+            "user_id": cursor.lastrowid
         }
 
     except sqlite3.IntegrityError as error:
-
         error_message = str(error).lower()
 
         if "email" in error_message:
-
             message = "This email is already registered."
 
         elif "registration_no" in error_message:
-
             message = (
                 "This registration number "
                 "is already registered."
             )
 
         else:
-
             message = "This user already exists."
 
         return {
@@ -186,7 +172,6 @@ def signup(user: SignupData):
         }
 
     finally:
-
         connection.close()
 
 
@@ -196,30 +181,31 @@ def signup(user: SignupData):
 
 @app.get("/api/users")
 def get_users():
-
     connection = get_database()
 
-    cursor = connection.cursor()
+    try:
+        cursor = connection.cursor()
 
-    cursor.execute(
-        """
-        SELECT
-            id,
-            full_name,
-            registration_no,
-            email,
-            role,
-            created_at
-        FROM users
-        ORDER BY id DESC
-        """
-    )
+        cursor.execute(
+            """
+            SELECT
+                id,
+                full_name,
+                registration_no,
+                email,
+                role,
+                created_at
+            FROM users
+            ORDER BY id DESC
+            """
+        )
 
-    users = cursor.fetchall()
+        users = cursor.fetchall()
 
-    connection.close()
+        return [dict(user) for user in users]
 
-    return [dict(user) for user in users]
+    finally:
+        connection.close()
 
 
 # =========================================================
@@ -228,30 +214,35 @@ def get_users():
 
 @app.delete("/api/users/{user_id}")
 def delete_user(user_id: int):
-
     connection = get_database()
 
-    cursor = connection.cursor()
+    try:
+        cursor = connection.cursor()
 
-    cursor.execute(
-        "DELETE FROM users WHERE id = ?",
-        (user_id,)
-    )
+        cursor.execute(
+            "DELETE FROM users WHERE id = ?",
+            (user_id,)
+        )
 
-    connection.commit()
+        connection.commit()
 
-    deleted = cursor.rowcount
-
-    connection.close()
-
-    if deleted == 0:
+        if cursor.rowcount == 0:
+            return {
+                "success": False,
+                "message": "User not found."
+            }
 
         return {
-            "success": False,
-            "message": "User not found."
+            "success": True,
+            "message": "User deleted successfully."
         }
 
-    return {
-        "success": True,
-        "message": "User deleted successfully."
-    }
+    finally:
+        connection.close()
+
+
+# =========================================================
+# DATE SHEET MODULE
+# =========================================================
+
+app.include_router(datesheet_router)
