@@ -1,9 +1,10 @@
+
 import sqlite3
 from pathlib import Path
 
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
-from pydantic import BaseModel, EmailStr
+from pydantic import BaseModel
 
 from datesheet import router as datesheet_router
 
@@ -78,13 +79,13 @@ create_database()
 
 
 # =========================================================
-# SIGNUP DATA MODEL
+# USER DATA MODEL
 # =========================================================
 
 class SignupData(BaseModel):
     full_name: str
     registration_no: str
-    email: EmailStr
+    email: str
     password: str
     role: str = "student"
 
@@ -137,7 +138,7 @@ def signup(user: SignupData):
             (
                 user.full_name,
                 user.registration_no,
-                str(user.email),
+                user.email,
                 user.password,
                 user.role,
             )
@@ -156,13 +157,11 @@ def signup(user: SignupData):
 
         if "email" in error_message:
             message = "This email is already registered."
-
         elif "registration_no" in error_message:
             message = (
                 "This registration number "
                 "is already registered."
             )
-
         else:
             message = "This user already exists."
 
