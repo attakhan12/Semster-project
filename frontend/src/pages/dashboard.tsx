@@ -63,12 +63,11 @@ export default function Dashboard() {
             </a>
 
             <a
-              href="#halls"
-              className="nav-item"
-              onClick={(event) => event.preventDefault()}
-            >
+              href="/halls" className="nav-item"
+              onClick={(e) => { e.preventDefault(); navigate("/halls"); }}>
               <DoorOpen size={18} />
-              <span>Halls</span>
+               <span>Halls</span>
+                                      
             </a>
 
             <a

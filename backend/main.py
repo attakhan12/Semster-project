@@ -5,7 +5,7 @@ from pathlib import Path
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
-
+from hall import router as hall_router
 from datesheet import router as datesheet_router
 
 
@@ -245,3 +245,6 @@ def delete_user(user_id: int):
 # =========================================================
 
 app.include_router(datesheet_router)
+
+
+app.include_router(hall_router)

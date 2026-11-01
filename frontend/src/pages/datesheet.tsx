@@ -405,6 +405,7 @@ export default function DateSheet() {
             </a>
 
             <a href="#halls" className="nav-item">
+              
               <DoorOpen size={18} />
               <span>Halls</span>
             </a>

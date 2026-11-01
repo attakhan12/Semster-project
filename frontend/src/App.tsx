@@ -11,6 +11,8 @@ import Signup from "./pages/Signup";
 import Dashboard from "./pages/dashboard";
 import DateSheet from "./pages/datesheet";
 
+import HallPage from "./pages/hall";
+
 function App() {
   return (
     <BrowserRouter>
@@ -39,7 +41,7 @@ function App() {
           path="/datesheet"
           element={<DateSheet />}
         />
-
+        <Route path="/halls" element={<HallPage />} />
         {/* Redirect unknown URLs to the login page */}
         <Route
           path="*"
