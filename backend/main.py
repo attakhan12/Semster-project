@@ -9,6 +9,10 @@ from hall import router as hall_router
 from datesheet import router as datesheet_router
 
 
+import hashlib
+import hmac
+import secrets
+
 # =========================================================
 # APPLICATION
 # =========================================================
@@ -48,6 +52,45 @@ def get_database():
     connection.row_factory = sqlite3.Row
     return connection
 
+# =========================================================
+# PASSWORD SECURITY
+# =========================================================
+
+def hash_password(password: str) -> str:
+    salt = secrets.token_hex(16)
+
+    password_hash = hashlib.pbkdf2_hmac(
+        "sha256",
+        password.encode("utf-8"),
+        salt.encode("utf-8"),
+        310000
+    ).hex()
+
+    return f"pbkdf2_sha256${salt}${password_hash}"
+
+
+def verify_password(password: str, stored_password: str) -> bool:
+    # Support passwords registered before this update.
+    if not stored_password.startswith("pbkdf2_sha256$"):
+        return hmac.compare_digest(password, stored_password)
+
+    try:
+        algorithm, salt, saved_hash = stored_password.split("$")
+
+        if algorithm != "pbkdf2_sha256":
+            return False
+
+        calculated_hash = hashlib.pbkdf2_hmac(
+            "sha256",
+            password.encode("utf-8"),
+            salt.encode("utf-8"),
+            310000
+        ).hex()
+
+        return hmac.compare_digest(calculated_hash, saved_hash)
+
+    except ValueError:
+        return False
 
 def create_database():
     connection = get_database()
@@ -88,6 +131,11 @@ class SignupData(BaseModel):
     email: str
     password: str
     role: str = "student"
+
+
+class LoginData(BaseModel):
+    email: str
+    password: str
 
 
 # =========================================================
@@ -139,7 +187,7 @@ def signup(user: SignupData):
                 user.full_name,
                 user.registration_no,
                 user.email,
-                user.password,
+                hash_password(user.password),
                 user.role,
             )
         )
@@ -174,6 +222,73 @@ def signup(user: SignupData):
         connection.close()
 
 
+
+# =========================================================
+# LOGIN
+# =========================================================
+
+@app.post("/api/login")
+def login(user: LoginData):
+    connection = get_database()
+
+    try:
+        cursor = connection.cursor()
+
+        cursor.execute(
+            """
+            SELECT id, full_name, registration_no, email, password, role
+            FROM users
+            WHERE LOWER(email) = LOWER(?)
+            """,
+            (user.email.strip(),)
+        )
+
+        existing_user = cursor.fetchone()
+
+        if not existing_user:
+            return {
+                "success": False,
+                "message": "Invalid email or password."
+            }
+
+        if not verify_password(
+            user.password,
+            existing_user["password"]
+        ):
+            return {
+                "success": False,
+                "message": "Invalid email or password."
+            }
+
+        # Upgrade an older plain-text password after successful login.
+        if not existing_user["password"].startswith("pbkdf2_sha256$"):
+            cursor.execute(
+                """
+                UPDATE users
+                SET password = ?
+                WHERE id = ?
+                """,
+                (
+                    hash_password(user.password),
+                    existing_user["id"]
+                )
+            )
+            connection.commit()
+
+        return {
+            "success": True,
+            "message": "Login successful.",
+            "user": {
+                "id": existing_user["id"],
+                "full_name": existing_user["full_name"],
+                "registration_no": existing_user["registration_no"],
+                "email": existing_user["email"],
+                "role": existing_user["role"]
+            }
+        }
+
+    finally:
+        connection.close()
 # =========================================================
 # GET ALL USERS
 # =========================================================

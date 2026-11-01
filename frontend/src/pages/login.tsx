@@ -6,15 +6,54 @@ export default function Login() {
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [error, setError] = useState("");
+  const [loading, setLoading] = useState(false);
 
-  function handleLogin(event: React.FormEvent<HTMLFormElement>) {
+  async function handleLogin(
+    event: React.FormEvent<HTMLFormElement>
+  ) {
     event.preventDefault();
 
-    console.log("Email:", email);
-    console.log("Password:", password);
+    setError("");
+    setLoading(true);
 
-    // Real authentication will be connected to Python later.
-    navigate("/dashboard");
+    try {
+      const response = await fetch(
+        "http://127.0.0.1:8000/api/login",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            email: email.trim(),
+            password: password,
+          }),
+        }
+      );
+
+      const data = await response.json();
+
+      if (!response.ok || !data.success) {
+        setError(data.message || "Invalid email or password.");
+        return;
+      }
+
+      // Save basic user information for the frontend.
+      sessionStorage.setItem(
+        "etis_user",
+        JSON.stringify(data.user)
+      );
+
+      navigate("/dashboard");
+
+    } catch (err) {
+      setError(
+        "Unable to connect to the server. Please try again."
+      );
+    } finally {
+      setLoading(false);
+    }
   }
 
   return (
@@ -69,11 +108,18 @@ export default function Login() {
               />
             </div>
 
+            {error && (
+              <p style={{ color: "red", marginBottom: "12px" }}>
+                {error}
+              </p>
+            )}
+
             <button
               type="submit"
               className="primary-button"
+              disabled={loading}
             >
-              Login
+              {loading ? "Checking..." : "Login"}
             </button>
 
           </form>
